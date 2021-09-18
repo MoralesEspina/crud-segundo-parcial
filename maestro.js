@@ -13,10 +13,10 @@ var mysqlConnection = mysql.createConnection({
     database: dbConf.database
 });
 
-//Visualizar Personas
-app.get("/personas", (req, res) => {
-    console.log("get lista personas");
-    mysqlConnection.query('Select * from persona', (err, rows, fields) => {
+//Visualizar Maestros
+app.get("/maestros", (req, res) => {
+    console.log("get lista maestros");
+    mysqlConnection.query('Select * from docente', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
@@ -27,10 +27,10 @@ app.get("/personas", (req, res) => {
 });
 
 
-//Ver Persona en Especifico
-app.get("/personas/:id", (req, res) => {
-    console.log("get persona");
-    mysqlConnection.query('Select * from persona where id = ?', [req.params.id], (err, rows, fields) => {
+//Ver Maestro en Especifico
+app.get("/maestros/:id", (req, res) => {
+    console.log("get estudiante");
+    mysqlConnection.query('Select * from docente where id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
@@ -40,13 +40,13 @@ app.get("/personas/:id", (req, res) => {
     });
 });
 
-//Crear Estudiante
-app.post("/personas", (req, res) => {
-    console.log("crear persona");
-    let per = req.body;
-    console.log(per);
-    mysqlConnection.query('insert into persona (nombre, apellido, fecha_nacimiento, Direccion) values (?,?,?,?)',
-        [per.Nombre, per.Apellido, per.Edad, per.Grado], (err, result) => {
+//Crear Maestro
+app.post("/maestros", (req, res) => {
+    console.log("Crear Maestro");
+    let est = req.body;
+    console.log(est);
+    mysqlConnection.query('insert into docente (id_persona, fecha_ingreso) values (?,?,?,?)',
+        [est.Nombre, est.Apellido, est.Edad, est.Grado], (err, result) => {
             if (!err) {
                 console.log(result);
                 
@@ -63,7 +63,7 @@ app.put("/estudiantes/:id", (req, res) => {
     console.log("update estudiante");
     let est = req.body;
     console.log(est);
-    mysqlConnection.query('update persona set nombre = ?, apellido = ?, fecha_nacimiento = ?, Direccion=? where id = ?',
+    mysqlConnection.query('update estudiante set nombre = ?, apellido = ?, edad = ?, grado=? where id = ?',
         [est.Nombre, est.Apellido, est.Edad, est.Grado, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
@@ -78,8 +78,8 @@ app.put("/estudiantes/:id", (req, res) => {
 
 //Eliminar Estudiante
 app.delete("/estudiantes/:id", (req, res) => {
-    console.log("update persona ");
-    mysqlConnection.query('delete from persona where id = ?',
+    console.log("update estudiante ");
+    mysqlConnection.query('delete from estudiante where id = ?',
         [ req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);

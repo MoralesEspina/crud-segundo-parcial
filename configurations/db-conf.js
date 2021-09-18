@@ -1,7 +1,7 @@
-const host = "phtfaw4p6a970uc0.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
-const user = "o2pcqu2di101rbzr";
-const password = 'pnzs8p59hrocvon8';
-const database = "yt23oldwpm5owhkn";
+const host = "j8oay8teq9xaycnm.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+const user = "zkwgkh7sv0wfa6mo";
+const password = 's07vymop90jj7xqs';
+const database = "u1ntiesb2kvna45k";
 
 exports.host=host; 
 exports.user=user;
