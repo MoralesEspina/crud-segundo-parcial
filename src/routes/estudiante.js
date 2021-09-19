@@ -5,7 +5,7 @@ const mysqlConnection = require('../configurations/db-conf');
 
 
 //Visualizar estudiante
-router.get("/estudiante", (req, res) => {
+router.get("/estudiantes", (req, res) => {
     mysqlConnection.query('Select * from estudiante', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
@@ -17,7 +17,7 @@ router.get("/estudiante", (req, res) => {
 });
 
 //Ver estudiante Individual
-router.get("/estudiante/:id", (req, res) => {
+router.get("/estudiantes/:id", (req, res) => {
     mysqlConnection.query('Select * from estudiante where id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
@@ -29,7 +29,7 @@ router.get("/estudiante/:id", (req, res) => {
 });
 
 //Crear Persona
-router.post("/estudiante", (req, res) => {
+router.post("/estudiantes", (req, res) => {
     let doc = req.body;
     mysqlConnection.query('insert into estudiante (id_persona, fecha_ingreso, carnet, status) values (?,?,?,?)',
         [doc.id_persona, doc.fecha_ingreso], (err, result) => {
@@ -44,7 +44,7 @@ router.post("/estudiante", (req, res) => {
 });
 
 //Actualizar estudiante
-router.put("/estudiante/:id", (req, res) => {
+router.put("/estudiantes/:id", (req, res) => {
     let doc = req.body;
     mysqlConnection.query('update estudiante set id_persona = ?, fecha_ingreso = ?, carnet = ?, status = ?, where id = ?',
         [doc.id_persona, doc.fecha_ingreso, req.params.id], (err, result) => {
@@ -61,7 +61,7 @@ router.put("/estudiante/:id", (req, res) => {
 
 
 //Eliminar estudiante
-router.delete("/estudiante/:id", (req, res) => {
+router.delete("/estudiantes/:id", (req, res) => {
     mysqlConnection.query('delete from estudiante where id = ?',
         [ req.params.id], (err, result) => {
             if (!err) {
