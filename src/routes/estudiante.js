@@ -46,7 +46,7 @@ router.post("/estudiantes", (req, res) => {
 //Actualizar estudiante
 router.put("/estudiantes/:id", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('update estudiante set id_persona = ?, fecha_ingreso = ?, carnet = ?, status = ?, where id = ?',
+    mysqlConnection.query('update estudiante set id_persona = ?, fecha_ingreso = ?, carnet = ?, status = ? where id = ?',
         [doc.id_persona, doc.fecha_ingreso, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);

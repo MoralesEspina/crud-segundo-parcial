@@ -47,6 +47,7 @@ router.post("/maestros", (req, res) => {
 router.put("/maestros/:id", (req, res) => {
     let doc = req.body;
     mysqlConnection.query('update docente set id_persona = ?, fecha_ingreso = ? where id = ?',
+ 
         [doc.id_persona, doc.fecha_ingreso, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
