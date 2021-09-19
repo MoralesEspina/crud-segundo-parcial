@@ -18,7 +18,7 @@ router.get("/maestros", (req, res) => {
 
 //Ver docente Individual
 router.get("/maestros/:id", (req, res) => {
-    mysqlConnection.query('Select * from docente where id = ?', [req.params.id], (err, rows, fields) => {
+    mysqlConnection.query('Select Nombre,Apellido,fecha_nacimiento,Direccion from persona Inner Join docente ON docente.id_persona = persona.id where id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
