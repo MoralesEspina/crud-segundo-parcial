@@ -17,7 +17,7 @@ router.get("/personas", (req, res) => {
 });
 
 //Ver Persona Individual
-router.get("/personas/:id", (req, res) => {
+router.get("/personas/:id", (req, res, next) => {
     mysqlConnection.query('Select * from persona where id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
@@ -26,10 +26,11 @@ router.get("/personas/:id", (req, res) => {
             res.send('error' + err);
         }
     });
+    next();
 });
 
 //Crear Persona
-router.post("/personas", (req, res) => {
+router.post("/personas", (req, res, next) => {
     let per = req.body;
     mysqlConnection.query('insert into persona (nombre, apellido,fecha_nacimiento,Direccion) values (?,?,?,?)',
         [per.nombre, per.apellido, per.fecha_nacimiento, per.Direccion], (err, result) => {
