@@ -33,7 +33,7 @@ router.get("/personas/:id", (req, res, next) => {
 router.post("/personas", (req, res, next) => {
     let per = req.body;
     mysqlConnection.query('insert into persona (nombre, apellido,fecha_nacimiento,direccion) values (?,?,?,?)',
-        [per.nombre, per.apellido, per.fecha_nacimiento, per.Direccion], (err, result) => {
+        [per.nombre, per.apellido, per.fecha_nacimiento, per.direccion], (err, result) => {
             if (!err) {
                 console.log(result);
                 res.status(201).send("Creado Correctamente");
@@ -48,7 +48,7 @@ router.post("/personas", (req, res, next) => {
 router.put("/personas/:id", (req, res) => {
     let per = req.body;
     mysqlConnection.query('update persona set nombre = ?, apellido = ?, fecha_nacimiento = ?, direccion=? where id = ?',
-        [per.nombre, per.apellido, per.fecha_nacimiento, per.Direccion, req.params.id], (err, result) => {
+        [per.nombre, per.apellido, per.fecha_nacimiento, per.direccion, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
                 
