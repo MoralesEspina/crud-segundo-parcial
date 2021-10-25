@@ -31,7 +31,7 @@ router.get("/maestros/:id", (req, res) => {
 //Crear Persona
 router.post("/maestros", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('insert into docente (id_persona, fecha_ingreso) values (?,?)',
+    mysqlConnection.query('insert into docente (idpersona, fecha_ingreso) values (?,?)',
         [doc.idpersona, doc.fecha_ingreso], (err, result) => {
             if (!err) {
                 console.log(result);
@@ -46,7 +46,7 @@ router.post("/maestros", (req, res) => {
 //Actualizar docente
 router.put("/maestros/:id", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('update docente set id_persona = ?, fecha_ingreso = ? where id = ?',
+    mysqlConnection.query('update docente set idpersona = ?, fecha_ingreso = ? where id = ?',
  
         [doc.idpersona, doc.fecha_ingreso, req.params.id], (err, result) => {
             if (!err) {
