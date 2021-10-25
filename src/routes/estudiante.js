@@ -31,7 +31,7 @@ router.get("/estudiantes/:id", (req, res) => {
 //Crear Persona
 router.post("/estudiantes", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('insert into estudiante (id_persona, fecha_ingreso, carnet, status) values (?,?,?,?)',
+    mysqlConnection.query('insert into estudiante (idpersona, fecha_ingreso, carnet, status) values (?,?,?,?)',
         [doc.idpersona, doc.fecha_ingreso, doc.carnet, doc.status], (err, result) => {
             if (!err) {
                 console.log(result);
@@ -46,7 +46,7 @@ router.post("/estudiantes", (req, res) => {
 //Actualizar estudiante
 router.put("/estudiantes/:id", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('update estudiante set id_persona = ?, fecha_ingreso = ?, carnet = ?, status = ? where id = ?',
+    mysqlConnection.query('update estudiante set idpersona = ?, fecha_ingreso = ?, carnet = ?, status = ? where id = ?',
         [doc.idpersona, doc.fecha_ingreso,doc.carnet, doc.status, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
