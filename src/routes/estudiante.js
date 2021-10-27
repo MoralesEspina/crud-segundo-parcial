@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
+const security = require('../security/verify')
 const mysqlConnection = require('../configurations/db-conf');
 
 
 //Visualizar estudiante
-router.get("/estudiantes", (req, res) => {
+router.get("/estudiantes",security, (req, res) => {
     mysqlConnection.query('Select * from estudiante', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
@@ -17,7 +17,7 @@ router.get("/estudiantes", (req, res) => {
 });
 
 //Ver estudiante Individual
-router.get("/estudiantes/:id", (req, res) => {
+router.get("/estudiantes/:id",security, (req, res) => {
     mysqlConnection.query('Select * from estudiante where id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
@@ -29,7 +29,7 @@ router.get("/estudiantes/:id", (req, res) => {
 });
 
 //Crear Persona
-router.post("/estudiantes", (req, res) => {
+router.post("/estudiantes",security, (req, res) => {
     let doc = req.body;
     mysqlConnection.query('insert into estudiante (idpersona, fecha_ingreso, carnet, status) values (?,?,?,?)',
         [doc.idpersona, doc.fecha_ingreso, doc.carnet, doc.status], (err, result) => {
@@ -44,7 +44,7 @@ router.post("/estudiantes", (req, res) => {
 });
 
 //Actualizar estudiante
-router.put("/estudiantes/:id", (req, res) => {
+router.put("/estudiantes/:id",security, (req, res) => {
     let doc = req.body;
     mysqlConnection.query('update estudiante set idpersona = ?, fecha_ingreso = ?, carnet = ?, status = ? where id = ?',
         [doc.idpersona, doc.fecha_ingreso,doc.carnet, doc.status, req.params.id], (err, result) => {
@@ -61,7 +61,7 @@ router.put("/estudiantes/:id", (req, res) => {
 
 
 //Eliminar estudiante
-router.delete("/estudiantes/:id", (req, res) => {
+router.delete("/estudiantes/:id",security, (req, res) => {
     mysqlConnection.query('delete from estudiante where id = ?',
         [ req.params.id], (err, result) => {
             if (!err) {
