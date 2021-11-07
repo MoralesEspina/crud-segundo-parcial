@@ -5,7 +5,7 @@ const mysqlConnection = require('../configurations/db-conf');
 
 
 //Visualizar Personas
-router.get("/personas", (req, res) => {
+router.get("/personas",security, (req, res) => {
     mysqlConnection.query('Select * from persona', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
