@@ -6,7 +6,7 @@ const mysqlConnection = require('../configurations/db-conf');
 
 //Visualizar estudiante
 router.get("/estudiantes",security, (req, res) => {
-    mysqlConnection.query('Select * from estudiante', (err, rows, fields) => {
+    mysqlConnection.query('Select estudiante.id,idpersona, nombre,apellido,fecha_ingreso,carnet,status from persona Inner Join estudiante ON persona.id = estudiante.id', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
