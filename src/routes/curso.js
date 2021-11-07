@@ -45,13 +45,13 @@ router.post("/curso", (req, res) => {
 
 //Actualizar curso
 router.put("/curso/:id", (req, res) => {
-    let doc = req.body;
-    mysqlConnection.query('update curso set nombre = ?, descripcion = ?, where id = ?',
-        [doc.nombre, doc.descripcion, req.params.id], (err, result) => {
+    let cur = req.body;
+    mysqlConnection.query('update curso set nombre = ?, descripcion = ? where id = ?',
+        [cur.nombre, cur.descripcion, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
                 
-                res.status(202).send("updated");
+                res.status(202).send("Actualizado Correctamente");
             } else {
                 console.log(err);
                 res.send('error' + err);
