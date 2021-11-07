@@ -5,7 +5,7 @@ const mysqlConnection = require('../configurations/db-conf');
 
 
 //Visualizar docente
-router.get("/maestros",security, (req, res) => {
+router.get("/maestros", security, (req, res) => {
     mysqlConnection.query('Select * from docente', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
