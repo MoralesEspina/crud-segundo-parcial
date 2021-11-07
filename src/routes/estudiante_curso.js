@@ -32,7 +32,7 @@ router.get("/estudiantes_curso/:id", (req, res) => {
 router.post("/estudiantes_curso", (req, res) => {
     let doc = req.body;
     mysqlConnection.query('insert into estudiante_curso (id_estudiante, id_curso, status, fecha_inicio, fecha_fin) values (?,?,?,?,?)',
-        [doc.id_persona, doc.fecha_ingreso], (err, result) => {
+        [doc.id_estudiante, doc.id_curso, doc.status, doc.fecha_inicio,doc.fecha_fin], (err, result) => {
             if (!err) {
                 console.log(result);
                 res.status(201).send("Creado Correctamente");
@@ -47,7 +47,7 @@ router.post("/estudiantes_curso", (req, res) => {
 router.put("/estudiantes_curso/:id", (req, res) => {
     let doc = req.body;
     mysqlConnection.query('update estudiante_curso set id_estudiante = ?, id_curso = ?, status = ?, fecha_inicio = ?, fecha_fin = ? where id = ?',
-        [doc.id_persona, doc.fecha_ingreso, req.params.id], (err, result) => {
+        [doc.id_estudiante, doc.id_curso, doc.status, doc.fecha_inicio,doc.fecha_fin, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
                 
