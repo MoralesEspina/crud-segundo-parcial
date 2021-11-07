@@ -6,7 +6,7 @@ const mysqlConnection = require('../configurations/db-conf');
 
 //Visualizar curso_docente
 router.get("/estudiantes_curso", (req, res) => {
-    mysqlConnection.query('Select * from estudiantes_curso', (err, rows, fields) => {
+    mysqlConnection.query('Select * from estudiante_curso', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
@@ -18,7 +18,7 @@ router.get("/estudiantes_curso", (req, res) => {
 
 //Ver estudiantes_curso Individual
 router.get("/estudiantes_curso/:id", (req, res) => {
-    mysqlConnection.query('Select * from estudiantes_curso where id = ?', [req.params.id], (err, rows, fields) => {
+    mysqlConnection.query('Select * from estudiante_curso where id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
@@ -31,7 +31,7 @@ router.get("/estudiantes_curso/:id", (req, res) => {
 //Crear Persona
 router.post("/estudiantes_curso", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('insert into estudiantes_curso (id_estudiante, id_curso, status, fecha_inicio, fecha_fin) values (?,?,?,?,?)',
+    mysqlConnection.query('insert into estudiante_curso (id_estudiante, id_curso, status, fecha_inicio, fecha_fin) values (?,?,?,?,?)',
         [doc.id_persona, doc.fecha_ingreso], (err, result) => {
             if (!err) {
                 console.log(result);
@@ -46,7 +46,7 @@ router.post("/estudiantes_curso", (req, res) => {
 //Actualizar estudiantes_curso
 router.put("/estudiantes_curso/:id", (req, res) => {
     let doc = req.body;
-    mysqlConnection.query('update estudiantes_curso set id_estudiante = ?, id_curso = ?, status = ?, fecha_inicio = ?, fecha_fin = ?, where id = ?',
+    mysqlConnection.query('update estudiante_curso set id_estudiante = ?, id_curso = ?, status = ?, fecha_inicio = ?, fecha_fin = ? where id = ?',
         [doc.id_persona, doc.fecha_ingreso, req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
@@ -62,7 +62,7 @@ router.put("/estudiantes_curso/:id", (req, res) => {
 
 //Eliminar estudiantes_curso
 router.delete("/estudiantes_curso/:id", (req, res) => {
-    mysqlConnection.query('delete from estudiantes_curso where id = ?',
+    mysqlConnection.query('delete from estudiante_curso where id = ?',
         [ req.params.id], (err, result) => {
             if (!err) {
                 console.log(result);
