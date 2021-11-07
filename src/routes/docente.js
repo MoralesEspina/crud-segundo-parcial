@@ -6,7 +6,7 @@ const mysqlConnection = require('../configurations/db-conf');
 
 //Visualizar docente
 router.get("/maestros", security, (req, res) => {
-    mysqlConnection.query('Select * from docente', (err, rows, fields) => {
+    mysqlConnection.query('Select docente.id,idpersona, nombre,apellido,fecha_ingreso from persona Inner Join docente ON persona.id = docente.idpersona ', (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
